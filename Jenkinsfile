@@ -5,6 +5,7 @@ pipeline {
         DOCKER_PASS = credentials('dockerhub-token')
         GIT_URL = 'https://github.com/rak2712/jobster-dockerized.git'
         GIT_BRANCH = 'main'
+        KUBECONFIG_PATH = '/var/lib/jenkins/kubeconfig.yaml'
     }
 
     stages {
@@ -35,9 +36,10 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
-                    sh 'kubectl apply -f k8s/ --validate=false'
-                }
+                sh '''
+                    export KUBECONFIG=$KUBECONFIG_PATH
+                    kubectl apply -f k8s/ --validate=false
+                '''
             }
         }
     }

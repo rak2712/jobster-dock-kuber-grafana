@@ -1,29 +1,29 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo
+  name: mongo-jobster2          # unique StatefulSet name
 spec:
-  serviceName: "mongo-service"
+  serviceName: "mongo-service-jobster2"   # unique headless service
   replicas: 1
   selector:
     matchLabels:
-      app: mongo
+      app: mongo-jobster2
   template:
     metadata:
       labels:
-        app: mongo
+        app: mongo-jobster2
     spec:
       containers:
         - name: mongo
-          image: mongo1
+          image: mongo:latest
           ports:
-            - containerPort: 28017
+            - containerPort: 28017    # unique port
           volumeMounts:
-            - name: mongo-pvc
+            - name: mongo-pvc-jobster2
               mountPath: /data/db
   volumeClaimTemplates:
     - metadata:
-        name: mongo-pvc
+        name: mongo-pvc-jobster2
       spec:
         accessModes: ["ReadWriteOnce"]
         resources:

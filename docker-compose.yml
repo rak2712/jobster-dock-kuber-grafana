@@ -6,7 +6,7 @@ services:
     container_name: mongo-service
     restart: always
     ports:
-      - "27017:27017"
+      - "28017:28017"
     volumes:
       - mongo-data:/data/db
 
@@ -15,11 +15,11 @@ services:
       context: ./
       dockerfile: Dockerfile
     ports:
-      - "5000:5000"
+      - "6000:6000"
     depends_on:
       - mongo-service
     environment:
-      - MONGO_URI=mongodb://mongo-service:27017/jobster
+      - MONGO_URI=mongodb://mongo-service:28017/jobster
       - JWT_SECRET=8bc475d7a8a04e6a9bd55a9d6f184e54
       - JWT_LIFETIME=30d
 
@@ -28,7 +28,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3000:80"
+      - "3000:82"
     depends_on:
       - backend
 

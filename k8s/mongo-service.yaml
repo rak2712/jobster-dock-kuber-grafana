@@ -4,7 +4,7 @@ metadata:
   name: mongo-service
 spec:
   ports:
-    - port: 27017
+    - port: 28017
   clusterIP: None
   selector:
     app: mongo

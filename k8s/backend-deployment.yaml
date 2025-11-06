@@ -16,7 +16,7 @@ spec:
         - name: backend
           image: rakshith3/jobster-backend:latest
           ports:
-            - containerPort: 5000
+            - containerPort: 6000
           env:
             - name: MONGO_URI
               value: "mongodb://mongo-service:27017/jobster"

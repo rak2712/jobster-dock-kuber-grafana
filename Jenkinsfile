@@ -15,7 +15,7 @@ pipeline {
         stage('Build Docker Images') {
             steps {
                 dir('jobster-dockerized/client') { sh 'docker build -t $DOCKER_USER/jobster-frontend:latest .' }
-                dir('jobster-dockerized/server') { sh 'docker build -t $DOCKER_USER/jobster-backend:latest .' }
+                dir('jobster-dockerized') { sh 'docker build -t $DOCKER_USER/jobster-backend:latest .' }
             }
         }
 

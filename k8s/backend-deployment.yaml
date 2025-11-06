@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
         - name: backend
-          image: rakshith3/jobsterbackend:latest1
+          image: rakshith3/jobsterbackend1
           ports:
             - containerPort: 6000
           env:

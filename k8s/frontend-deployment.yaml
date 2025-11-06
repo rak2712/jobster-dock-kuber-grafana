@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: frontend
-        image: rakshith3/jobster-frontend:latest
+        image: rakshith3/jobsterfrontend1
         ports:
         - containerPort: 80
 ---

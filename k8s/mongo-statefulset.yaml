@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: mongo
-          image: mongo:latest
+          image: mongo:latest1
           ports:
             - containerPort: 28017
           volumeMounts:

@@ -2,7 +2,7 @@ version: "3.8"
 
 services:
   mongo-service:
-    image: mongo:latest
+    image: mongo:latest1
     container_name: mongo-service
     restart: always
     ports:
@@ -28,7 +28,7 @@ services:
       context: ./client
       dockerfile: Dockerfile
     ports:
-      - "3000:82"
+      - "3000:80"
     depends_on:
       - backend
 

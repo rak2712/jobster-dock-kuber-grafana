@@ -14,16 +14,16 @@ pipeline {
 
         stage('Build Docker Images') {
             steps {
-                dir('jobster-dockerized/client') { sh 'docker build -t $DOCKER_USER/jobster-frontend:latest .' }
-                dir('jobster-dockerized') { sh 'docker build -t $DOCKER_USER/jobster-backend:latest .' }
+                dir('jobster-dockerized/client') { sh 'docker build -t $DOCKER_USER/jobsterfrontend:latest1 .' }
+                dir('jobster-dockerized') { sh 'docker build -t $DOCKER_USER/jobsterbackend:latest1 .' }
             }
         }
 
         stage('Push Docker Images') {
             steps {
                 sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
-                sh 'docker push $DOCKER_USER/jobster-frontend:latest'
-                sh 'docker push $DOCKER_USER/jobster-backend:latest'
+                sh 'docker push $DOCKER_USER/jobsterfrontend:latest1'
+                sh 'docker push $DOCKER_USER/jobsterbackend:latest1'
             }
         }
 

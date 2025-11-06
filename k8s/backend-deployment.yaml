@@ -21,7 +21,7 @@ spec:
             - name: MONGO_URI
               value: mongodb://mongo-service-jobster2:28017/jobster
             - name: JWT_SECRET
-              value: "YOUR_SECRET"
+              value: "8bc475d7a8a04e6a9bd55a9d6f184e54"
             - name: JWT_LIFETIME
               value: "30d"
 ---

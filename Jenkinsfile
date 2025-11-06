@@ -9,13 +9,19 @@ pipeline {
 
     stages {
         stage('Checkout Code') {
-            steps { sh 'rm -rf jobster-dockerized && git clone $GIT_URL' }
+            steps { 
+                sh 'rm -rf jobster-dockerized && git clone -b $GIT_BRANCH $GIT_URL' 
+            }
         }
 
         stage('Build Docker Images') {
             steps {
-                dir('jobster-dockerized/client') { sh 'docker build -t $DOCKER_USER/jobsterfrontend1 .' }
-                dir('jobster-dockerized') { sh 'docker build -t $DOCKER_USER/jobsterbackend1 .' }
+                dir('jobster-dockerized/client') { 
+                    sh 'docker build -t $DOCKER_USER/jobsterfrontend1 .' 
+                }
+                dir('jobster-dockerized') { 
+                    sh 'docker build -t $DOCKER_USER/jobsterbackend1 .' 
+                }
             }
         }
 
@@ -29,7 +35,9 @@ pipeline {
 
         stage('Deploy to Kubernetes') {
             steps {
-                sh 'kubectl apply -f k8s/'
+                withCredentials([file(credentialsId: 'kubeconfig-file', variable: 'KUBECONFIG')]) {
+                    sh 'kubectl apply -f k8s/ --validate=false'
+                }
             }
         }
     }

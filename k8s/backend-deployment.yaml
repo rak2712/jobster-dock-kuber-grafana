@@ -19,7 +19,7 @@ spec:
             - containerPort: 6000
           env:
             - name: MONGO_URI
-              value: "mongodb://mongo-service:27017/jobster"
+              value: mongodb://mongo-service-jobster2:28017/jobster"
             - name: JWT_SECRET
               value: "YOUR_SECRET"
             - name: JWT_LIFETIME

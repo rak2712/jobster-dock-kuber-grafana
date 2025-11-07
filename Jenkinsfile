@@ -48,8 +48,8 @@ pipeline {
                 sh '''
                     export KUBECONFIG=$KUBECONFIG_PATH
 
-                    # FRONTEND: 30080 -> 80
-                    nohup kubectl port-forward --address 0.0.0.0 svc/jobster-frontend 30080:80 -n default >/dev/null 2>&1 &
+                    // # FRONTEND: 30080 -> 80
+                    // nohup kubectl port-forward --address 0.0.0.0 svc/jobster-frontend 30080:80 -n default >/dev/null 2>&1 &
 
                     # BACKEND: 30060 -> 5000
                     nohup kubectl port-forward --address 0.0.0.0 svc/backend-service 30060:5000 -n default >/dev/null 2>&1 &

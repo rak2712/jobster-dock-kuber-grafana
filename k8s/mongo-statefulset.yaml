@@ -17,7 +17,7 @@ spec:
         - name: mongo
           image: mongo:latest
           ports:
-            - containerPort: 28017    # unique port
+            - containerPort: 27018    # unique port
           volumeMounts:
             - name: mongo-pvc-jobster2
               mountPath: /data/db

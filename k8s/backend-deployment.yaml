@@ -12,20 +12,22 @@ spec:
       labels:
         app: backend
     spec:
-      # initContainer waits for MongoDB to be ready
       initContainers:
         - name: wait-for-mongo
-          image: busybox
+          image: alpine:3.18          # ✅ fixed: busybox → alpine
           command:
             - sh
             - -c
             - |
-              echo "Waiting for MongoDB..."
-              until nc -z mongo-service-jobster2-clusterip.default.svc.cluster.local 27018; do
+              echo "Installing DNS & NC tools..."
+              apk add --no-cache bind-tools netcat-openbsd     # ✅ DNS + nc fix
+              
+              echo "Waiting for MongoDB on 27018..."
+              until nc -zv mongo-service-jobster2.default.svc.cluster.local 27018; do
                 echo "MongoDB not ready, retrying..."
                 sleep 2
               done
-              echo "MongoDB is up!"
+              echo "✅ MongoDB is UP!"
       containers:
         - name: backend
           image: rakshith3/jobsterbackend1:latest
@@ -33,7 +35,7 @@ spec:
             - containerPort: 6000
           env:
             - name: MONGO_URI
-              value: mongodb://mongo-service-jobster2-clusterip.default.svc.cluster.local:27018/jobster
+              value: mongodb://mongo-service-jobster2.default.svc.cluster.local:27018/jobster
             - name: JWT_SECRET
               value: "8bc475d7a8a04e6a9bd55a9d6f184e54"
             - name: JWT_LIFETIME

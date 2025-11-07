@@ -1,6 +1,5 @@
 pipeline {
     agent any
-
     environment {
         DOCKER_USER = 'rakshith3'
         DOCKER_PASS = credentials('dockerhub-token')
@@ -10,29 +9,28 @@ pipeline {
     }
 
     stages {
-
         stage('Checkout Code') {
             steps { 
-                sh 'rm -rf jobster-dockerized && git clone -b $GIT_BRANCH $GIT_URL'
+                sh 'rm -rf jobster-dockerized && git clone -b $GIT_BRANCH $GIT_URL' 
             }
         }
 
         stage('Build Docker Images') {
             steps {
-                dir('jobster-dockerized/client') {
-                    sh "docker build -t $DOCKER_USER/jobsterfrontend1 ."
+                dir('jobster-dockerized/client') { 
+                    sh 'docker build -t $DOCKER_USER/jobsterfrontend1 .' 
                 }
-                dir('jobster-dockerized') {
-                    sh "docker build -t $DOCKER_USER/jobsterbackend1 ."
+                dir('jobster-dockerized') { 
+                    sh 'docker build -t $DOCKER_USER/jobsterbackend1 .' 
                 }
             }
         }
 
         stage('Push Docker Images') {
             steps {
-                sh "echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin"
-                sh "docker push $DOCKER_USER/jobsterfrontend1"
-                sh "docker push $DOCKER_USER/jobsterbackend1"
+                sh 'echo $DOCKER_PASS | docker login -u $DOCKER_USER --password-stdin'
+                sh 'docker push $DOCKER_USER/jobsterfrontend1'
+                sh 'docker push $DOCKER_USER/jobsterbackend1'
             }
         }
 

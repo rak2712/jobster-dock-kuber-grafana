@@ -32,7 +32,7 @@ spec:
         - name: backend
           image: rakshith3/jobsterbackend1:latest
           ports:
-            - containerPort: 6000
+            - containerPort: 5000
           env:
             - name: MONGO_URI
               value: mongodb://mongo-service-jobster2.default.svc.cluster.local:27018/jobster

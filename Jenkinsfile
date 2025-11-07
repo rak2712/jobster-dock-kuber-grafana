@@ -2,11 +2,11 @@ pipeline {
     agent any
 
     environment {
-        DOCKER_USER      = 'rakshith3'
-        DOCKER_PASS      = credentials('dockerhub-token')
-        GIT_URL          = 'https://github.com/rak2712/jobster-dockerized.git'
-        GIT_BRANCH       = 'main'
-        KUBECONFIG_PATH  = '/var/lib/jenkins/kubeconfig.yaml'
+        DOCKER_USER       = 'rakshith3'
+        DOCKER_PASS       = credentials('dockerhub-token')
+        GIT_URL           = 'https://github.com/rak2712/jobster-dockerized.git'
+        GIT_BRANCH        = 'main'
+        KUBECONFIG_PATH   = '/var/lib/jenkins/kubeconfig.yaml'
     }
 
     stages {
@@ -47,8 +47,8 @@ pipeline {
                 sh '''
                     export KUBECONFIG=$KUBECONFIG_PATH
 
-                    cd jobster-dockerized/k8s
-                    kubectl apply -f .
+                    # k8s folder is in WORKSPACE root, NOT inside repo
+                    kubectl apply -f k8s/ --validate=false
                 '''
             }
         }

@@ -21,14 +21,14 @@ spec:
             - -c
             - |
               echo "Waiting for MongoDB..."
-              until nc -z mongo-service-jobster2-clusterip 27018; do
+              until nc -z mongo-service-jobster2-clusterip.default.svc.cluster.local 27018; do
                 echo "MongoDB not ready, retrying..."
                 sleep 2
               done
               echo "MongoDB is up!"
       containers:
         - name: backend
-          image: rakshith3/jobsterbackend1
+          image: rakshith3/jobsterbackend1:latest
           ports:
             - containerPort: 6000
           env:
@@ -38,5 +38,3 @@ spec:
               value: "8bc475d7a8a04e6a9bd55a9d6f184e54"
             - name: JWT_LIFETIME
               value: "30d"
----
-

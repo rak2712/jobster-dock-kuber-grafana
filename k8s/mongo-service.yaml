@@ -4,8 +4,8 @@ metadata:
   name: mongo-service-jobster2   # unique service name
 spec:
   ports:
-    - port: 28017
-      targetPort: 28017
+    - port: 27018
+      targetPort: 27018
   clusterIP: None                 # headless service
   selector:
     app: mongo-jobster2

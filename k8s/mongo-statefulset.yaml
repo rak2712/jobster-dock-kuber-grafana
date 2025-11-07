@@ -1,9 +1,9 @@
 apiVersion: apps/v1
 kind: StatefulSet
 metadata:
-  name: mongo-jobster2          # unique StatefulSet name
+  name: mongo-jobster2
 spec:
-  serviceName: "mongo-service-jobster2"   # unique headless service
+  serviceName: "mongo-service-jobster2"
   replicas: 1
   selector:
     matchLabels:
@@ -16,8 +16,9 @@ spec:
       containers:
         - name: mongo
           image: mongo:latest
+          command: ["mongod", "--port", "27018", "--bind_ip_all"]   # ✅ REQUIRED FIX
           ports:
-            - containerPort: 27018    # unique port
+            - containerPort: 27018
           volumeMounts:
             - name: mongo-pvc-jobster2
               mountPath: /data/db

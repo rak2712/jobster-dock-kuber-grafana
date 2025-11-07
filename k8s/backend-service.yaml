@@ -8,6 +8,6 @@ spec:
     app: backend
   ports:
     - protocol: TCP
-      port: 6000           # cluster internal port
-      targetPort: 6000     # container port
+      port: 5000           # cluster internal port
+      targetPort: 5000     # container port
       nodePort: 30060      # external port to access from other machines
